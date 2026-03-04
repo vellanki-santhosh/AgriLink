@@ -39,9 +39,9 @@ jobs:
           cd "Agri link"
           npm run build
           
-      - name: Copy index.html to root
+      - name: Copy dist contents to root
         run: |
-          cp Agri link/index.html index.html
+          cp -r Agri link/dist/* .
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -49,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'Agri link/dist'
+          path: '.'
 
   deploy:
     environment:
