@@ -176,8 +176,23 @@ See `requirements.txt` and `package.json` for complete lists.
 
 ## 🚀 Deployment
 
-### Frontend (Vercel, Netlify, etc.)
+### GitHub Pages (Automatic)
+
+This project is configured for automatic GitHub Pages deployment:
+
+1. **Already Configured**: The `.github/workflows/deploy.yml` workflow is set up
+2. **Automatic Deployment**: Pushes to `main` branch auto-deploy to GitHub Pages
+3. **Live URL**: https://vellanki-santhosh.github.io/AgriLink/
+
+**To Enable GitHub Pages:**
+1. Go to your repository on GitHub
+2. Navigate to Settings → Pages
+3. Under "Build and deployment", select "GitHub Actions"
+4. Push to main branch - deployment happens automatically!
+
+### Frontend (Manual - Vercel, Netlify, etc.)
 ```bash
+cd "Agri link"
 npm run build
 # Deploy the dist/ folder
 ```
@@ -186,6 +201,8 @@ npm run build
 1. Set environment variables
 2. Install Python dependencies
 3. Run Flask app on specified port
+
+**Note**: GitHub Pages serves static files only. For full functionality with backend features (soil analysis), you'll need to deploy the Flask backend separately and update the API_URL in the frontend.
 
 ## 📝 Development
 
