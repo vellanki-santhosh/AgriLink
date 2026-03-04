@@ -39,6 +39,10 @@ jobs:
           cd "Agri link"
           npm run build
           
+      - name: Copy index.html to root
+        run: |
+          cp Agri link/index.html index.html
+          
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
