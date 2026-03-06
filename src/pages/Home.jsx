@@ -26,7 +26,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { base44 } from '@/api/base44Client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import heroFarm from '@/assets/hero_farm.png';
 
@@ -183,24 +183,24 @@ const Home = () => {
             </section>
 
             {/* ── Quick Actions ── */}
-            <section className="relative z-20 -mt-16 container mx-auto px-4">
+            <section className="relative z-20 -mt-16 container mx-auto px-4 mb-8">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     {[
                         { icon: Map, path: '/lands', label: t('home.findLand'), color: 'bg-emerald-600' },
                         { icon: Tractor, path: '/equipment', label: t('home.rentEquipment'), color: 'bg-blue-600' },
                         { icon: Users, path: '/workers', label: t('home.hireLabor'), color: 'bg-orange-600' },
-                        { icon: TrendingUp, path: '#market', label: t('home.checkPrices'), color: 'bg-indigo-600' },
+                        { icon: TrendingUp, path: '/dashboard', label: t('home.checkPrices'), color: 'bg-indigo-600' },
                         { icon: Beaker, path: '/soil-analysis', label: t('nav.soilAnalysis'), color: 'bg-teal-600' },
                         { icon: Brain, path: '/advisory', label: t('nav.advisory'), color: 'bg-violet-600' }
                     ].map((action, i) => (
-                        <Link to={action.path} key={i}>
+                        <Link to={action.path} key={i} className="group">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 + i * 0.1 }}
-                                className="bg-white p-6 rounded-3xl shadow-xl shadow-slate-200/50 flex flex-col items-center gap-4 text-center hover:scale-[1.03] transition-transform cursor-pointer border border-slate-100"
+                                className="bg-white p-6 rounded-3xl shadow-xl shadow-slate-200/50 flex flex-col items-center gap-4 text-center hover:shadow-2xl group-hover:scale-[1.05] group-hover:-translate-y-2 transition-all cursor-pointer border border-slate-100 group-hover:border-primary/30"
                             >
-                                <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg", action.color)}>
+                                <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform", action.color)}>
                                     <action.icon className="w-7 h-7" />
                                 </div>
                                 <span className="font-bold text-slate-800 text-sm md:text-base">{action.label}</span>
@@ -217,10 +217,12 @@ const Home = () => {
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">{t('home.realTimeTitle1')} {t('home.realTimeTitle2')}</h2>
                         <p className="text-slate-500 font-medium">{t('home.realTimeDesc')}</p>
                     </div>
-                    <Button variant="outline" className="rounded-full px-6 flex items-center gap-2 font-bold border-slate-200 text-slate-600">
-                        <LayoutDashboard className="w-4 h-4" />
-                        Go to Dashboard
-                    </Button>
+                    <Link to="/dashboard">
+                        <Button variant="outline" className="rounded-full px-6 flex items-center gap-2 font-bold border-slate-200 text-slate-600">
+                            <LayoutDashboard className="w-4 h-4" />
+                            Go to Dashboard
+                        </Button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

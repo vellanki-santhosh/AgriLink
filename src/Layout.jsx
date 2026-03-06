@@ -183,6 +183,163 @@ const Layout = ({ children }) => {
                 {children}
             </main>
 
+            {/* Quick Navigation Section */}
+            <section className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200">
+                <div className="container mx-auto max-w-6xl">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-4xl font-bold text-slate-900 mb-3">Explore All Features</h2>
+                        <p className="text-slate-600 text-lg">Quick access to all AgriLink services</p>
+                    </div>
+                    
+                    {/* Core Services */}
+                    <div className="mb-16">
+                        <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <div className="w-1 h-6 bg-primary rounded-full"></div>
+                            Core Services
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                            <Link to="/lands" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-blue-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
+                                        <Map className="w-7 h-7 text-blue-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Find Lands</h4>
+                                    <p className="text-sm text-slate-600">Browse and rent agricultural land</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/equipment" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-orange-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-100 transition-colors">
+                                        <Tractor className="w-7 h-7 text-orange-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Equipment</h4>
+                                    <p className="text-sm text-slate-600">Rent tractors and machinery</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/workers" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-purple-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-100 transition-colors">
+                                        <Users className="w-7 h-7 text-purple-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Hire Workers</h4>
+                                    <p className="text-sm text-slate-600">Find skilled agricultural workers</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/transport" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-cyan-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-cyan-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-100 transition-colors">
+                                        <Tractor className="w-7 h-7 text-cyan-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Transport</h4>
+                                    <p className="text-sm text-slate-600">Book delivery services</p>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Tools & Resources */}
+                    <div className="mb-16">
+                        <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <div className="w-1 h-6 bg-primary rounded-full"></div>
+                            Tools & Resources
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                            <Link to="/dashboard" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-indigo-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-100 transition-colors">
+                                        <LayoutDashboard className="w-7 h-7 text-indigo-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Dashboard</h4>
+                                    <p className="text-sm text-slate-600">AI advisor & market updates</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/calendar" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-yellow-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-yellow-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-yellow-100 transition-colors">
+                                        <Beaker className="w-7 h-7 text-yellow-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Crop Calendar</h4>
+                                    <p className="text-sm text-slate-600">Seasonal farming guide</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/soil-analysis" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-amber-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors">
+                                        <Beaker className="w-7 h-7 text-amber-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Soil Analysis</h4>
+                                    <p className="text-sm text-slate-600">Test and improve soil health</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/advisory" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-emerald-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-100 transition-colors">
+                                        <Brain className="w-7 h-7 text-emerald-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Advisory</h4>
+                                    <p className="text-sm text-slate-600">Expert farming tips</p>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Account & Support */}
+                    <div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <div className="w-1 h-6 bg-primary rounded-full"></div>
+                            Account & Support
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                            <Link to="/messages" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-pink-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-pink-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-pink-100 transition-colors">
+                                        <MessageSquare className="w-7 h-7 text-pink-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Messages</h4>
+                                    <p className="text-sm text-slate-600">Chat with users</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/bookings" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-rose-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-rose-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-rose-100 transition-colors">
+                                        <Bell className="w-7 h-7 text-rose-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Bookings</h4>
+                                    <p className="text-sm text-slate-600">Manage your reservations</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/profile" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-slate-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-slate-200 transition-colors">
+                                        <User className="w-7 h-7 text-slate-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Profile</h4>
+                                    <p className="text-sm text-slate-600">Manage your account</p>
+                                </div>
+                            </Link>
+
+                            <Link to="/support" className="group">
+                                <div className="p-6 bg-white border border-slate-200 rounded-2xl hover:border-teal-500 hover:shadow-lg transition-all h-full hover:-translate-y-1">
+                                    <div className="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-100 transition-colors">
+                                        <MessageSquare className="w-7 h-7 text-teal-600" />
+                                    </div>
+                                    <h4 className="font-bold text-slate-900 mb-1">Support</h4>
+                                    <p className="text-sm text-slate-600">Help & contact support</p>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Footer */}
             <footer className="bg-slate-950 text-slate-300 relative overflow-hidden">
                 {/* Animated top border */}
@@ -237,10 +394,10 @@ const Layout = ({ children }) => {
                             <div>
                                 <h4 className="text-white font-bold mb-6 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary"></div> Support</h4>
                                 <ul className="space-y-3 text-sm text-slate-400 border-l border-slate-800 pl-4">
-                                    <li><button onClick={() => alert('Help Center - Coming Soon!')} className="hover:text-primary transition-all text-left flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Help Center</button></li>
-                                    <li><button onClick={() => alert('Contact Us - Coming Soon!')} className="hover:text-primary transition-all text-left flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Contact Us</button></li>
-                                    <li><button onClick={() => alert('Terms of Service - Coming Soon!')} className="hover:text-primary transition-all text-left flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Terms of Service</button></li>
-                                    <li><button onClick={() => alert('Privacy Policy - Coming Soon!')} className="hover:text-primary transition-all text-left flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Privacy Policy</button></li>
+                                    <li><Link to="/support" className="hover:text-primary transition-all flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Help Center</Link></li>
+                                    <li><Link to="/support" className="hover:text-primary transition-all flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Contact Us</Link></li>
+                                    <li><Link to="/support" className="hover:text-primary transition-all flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Terms of Service</Link></li>
+                                    <li><Link to="/support" className="hover:text-primary transition-all flex items-center gap-2 relative before:content-[''] before:w-1 before:h-1 before:bg-primary before:rounded-full before:absolute before:-left-5 before:opacity-0 hover:before:opacity-100 hover:translate-x-1 before:transition-all">Privacy Policy</Link></li>
                                 </ul>
                             </div>
                         </div>

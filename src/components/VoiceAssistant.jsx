@@ -265,7 +265,7 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                 suggestions: ["How to use app", "Contact support"],
                 actions: [
                     { label: 'Dashboard', icon: Sparkles, action: () => navigate('/dashboard') },
-                    { label: 'Help', icon: Bot, action: () => alert('Help Center Coming Soon!') }
+                    { label: 'Help', icon: Bot, action: () => navigate('/support') }
                 ]
             };
         }
@@ -299,46 +299,47 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-end justify-center p-0 md:p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             {/* Backdrop */}
             <motion.div 
                 initial={{ opacity: 0 }} 
                 animate={{ opacity: 1 }} 
                 exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                className="absolute inset-0 bg-black/40 backdrop-blur-sm"
                 onClick={onClose}
             />
             
             {/* Assistant Panel */}
             <motion.div 
-                initial={{ opacity: 0, y: 100, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 100, scale: 0.9 }}
-                className="relative w-full md:w-[420px] md:max-h-[80vh] bg-white md:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+                exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="relative w-full md:w-[500px] max-h-[85vh] bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-slate-100"
             >
                 {/* Header */}
-                <div className="premium-gradient p-4 md:p-6 text-white">
-                    <div className="flex items-center justify-between">
+                <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 text-white">
+                    <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-md">
-                                <Bot className="w-6 h-6" />
+                            <div className="w-14 h-14 bg-white/15 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+                                <Bot className="w-7 h-7" />
                             </div>
                             <div>
-                                <h3 className="font-bold text-lg">AgriVoice Assistant</h3>
-                                <p className="text-xs text-white/70">AI-Powered Farming Advisor</p>
+                                <h3 className="font-bold text-xl leading-tight">AgriVoice Assistant</h3>
+                                <p className="text-xs text-white/75 font-medium">AI-Powered Farming Advisor</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
                             <button 
                                 onClick={() => setTextMode(!textMode)}
-                                className="p-2 bg-white/10 rounded-xl hover:bg-white/20 transition-colors"
-                                title="Text Mode"
+                                className="p-2.5 bg-white/15 hover:bg-white/25 rounded-xl transition-colors border border-white/10"
+                                title="Toggle Text/Voice Mode"
                             >
                                 {textMode ? <Mic className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
                             </button>
                             <button 
                                 onClick={onClose}
-                                className="p-2 bg-white/10 rounded-xl hover:bg-white/20 transition-colors"
+                                className="p-2.5 bg-white/15 hover:bg-white/25 rounded-xl transition-colors border border-white/10"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -346,14 +347,14 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                     </div>
                     
                     {/* Quick Actions */}
-                    <div className="flex gap-2 mt-4 overflow-x-auto pb-1">
+                    <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                         {quickActions.map((action, i) => (
                             <button
                                 key={i}
                                 onClick={() => handleVoiceInput(action.query)}
-                                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-full text-xs font-medium whitespace-nowrap transition-colors"
+                                className="flex items-center gap-1.5 px-3 py-2 bg-white/15 hover:bg-white/25 rounded-full text-xs font-medium whitespace-nowrap transition-colors border border-white/10"
                             >
-                                <action.icon className="w-3 h-3" />
+                                <action.icon className="w-3.5 h-3.5" />
                                 {action.label}
                             </button>
                         ))}
@@ -361,42 +362,50 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[50vh] md:max-h-[400px] bg-slate-50">
+                <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-slate-50 to-white">
                     {messages.map((msg) => (
                         <motion.div
                             key={msg.id}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
+                            transition={{ ease: 'easeOut', duration: 0.3 }}
                             className={cn(
-                                "flex",
+                                "flex gap-2",
                                 msg.role === 'user' ? "justify-end" : "justify-start"
                             )}
                         >
+                            {msg.role === 'assistant' && (
+                                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                                    <Bot className="w-4 h-4 text-emerald-600" />
+                                </div>
+                            )}
                             <div className={cn(
-                                "max-w-[85%] p-4 rounded-3xl",
+                                "max-w-[75%] px-5 py-3 rounded-2xl",
                                 msg.role === 'user' 
-                                    ? "bg-primary text-white rounded-br-md" 
-                                    : "bg-white border border-slate-100 shadow-sm rounded-bl-md"
+                                    ? "bg-emerald-600 text-white rounded-tr-none shadow-md" 
+                                    : "bg-white border border-slate-200 shadow-sm rounded-tl-none"
                             )}>
-                                <p className="text-sm leading-relaxed">{msg.content}</p>
+                                <p className={cn(
+                                    "text-sm leading-relaxed font-medium",
+                                    msg.role === 'user' ? "text-white" : "text-slate-700"
+                                )}>{msg.content}</p>
                                 
                                 {/* Action Buttons */}
                                 {msg.actions && msg.actions.length > 0 && (
-                                    <div className="flex flex-wrap gap-2 mt-3">
+                                    <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-200">
                                         {msg.actions.map((action, i) => (
                                             <button
                                                 key={i}
                                                 onClick={action.action}
                                                 className={cn(
-                                                    "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all",
+                                                    "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all hover:shadow-md",
                                                     msg.role === 'user' 
                                                         ? "bg-white/20 hover:bg-white/30 text-white" 
-                                                        : "bg-primary/10 hover:bg-primary/20 text-primary"
+                                                        : "bg-emerald-50 hover:bg-emerald-100 text-emerald-700"
                                                 )}
                                             >
-                                                <action.icon className="w-3 h-3" />
+                                                <action.icon className="w-3.5 h-3.5" />
                                                 {action.label}
-                                                <ChevronRight className="w-3 h-3" />
                                             </button>
                                         ))}
                                     </div>
@@ -407,11 +416,14 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                     
                     {/* Loading */}
                     {isLoading && (
-                        <div className="flex justify-start">
-                            <div className="bg-white border border-slate-100 shadow-sm p-4 rounded-3xl rounded-bl-md">
+                        <div className="flex justify-start gap-2">
+                            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                                <Bot className="w-4 h-4 text-emerald-600" />
+                            </div>
+                            <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-2xl rounded-tl-none">
                                 <div className="flex items-center gap-2">
-                                    <Loader2 className="w-4 h-4 animate-spin text-primary" />
-                                    <span className="text-sm text-slate-500">Analyzing...</span>
+                                    <Loader2 className="w-4 h-4 animate-spin text-emerald-600" />
+                                    <span className="text-sm text-slate-600 font-medium">Analyzing your request...</span>
                                 </div>
                             </div>
                         </div>
@@ -421,7 +433,7 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Input Area */}
-                <div className="p-4 bg-white border-t border-slate-100">
+                <div className="p-6 bg-white border-t border-slate-100">
                     {/* Voice Wave Animation */}
                     <AnimatePresence>
                         {isListening && (
@@ -429,13 +441,13 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="mb-3 p-3 bg-primary/10 rounded-2xl"
+                                className="mb-4 p-4 bg-emerald-50 rounded-2xl border border-emerald-200"
                             >
                                 <div className="flex items-center justify-center gap-1 mb-2">
                                     {[1, 2, 3, 4, 5].map((i) => (
                                         <motion.div
                                             key={i}
-                                            className="w-1 bg-primary rounded-full"
+                                            className="w-1.5 bg-emerald-500 rounded-full"
                                             animate={{
                                                 height: [10, 24, 16, 28, 12],
                                             }}
@@ -447,7 +459,7 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                                         />
                                     ))}
                                 </div>
-                                <p className="text-center text-sm text-primary font-medium">
+                                <p className="text-center text-sm text-emerald-700 font-semibold">
                                     {transcript || "Listening..."}
                                 </p>
                             </motion.div>
@@ -455,19 +467,19 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                     </AnimatePresence>
 
                     {error && (
-                        <div className="mb-3 p-3 bg-red-50 text-red-600 text-sm rounded-2xl">
+                        <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200 font-medium">
                             {error}
                         </div>
                     )}
 
-                    <form onSubmit={handleSendText} className="flex items-center gap-2">
+                    <form onSubmit={handleSendText} className="flex items-center gap-3">
                         <div className="flex-1 relative">
                             <input
                                 type="text"
                                 value={transcript}
                                 onChange={(e) => setTranscript(e.target.value)}
-                                placeholder={textMode ? "Type your question..." : "Tap microphone to speak..."}
-                                className="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 text-sm font-medium"
+                                placeholder={textMode ? "Type your question here..." : "Click microphone to start..."}
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-medium placeholder-slate-400"
                                 disabled={!textMode && !isListening}
                             />
                         </div>
@@ -476,7 +488,7 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                             <button
                                 type="button"
                                 onClick={stopSpeaking}
-                                className="w-12 h-12 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl flex items-center justify-center transition-colors"
+                                className="w-11 h-11 bg-red-500 hover:bg-red-600 text-white rounded-xl flex items-center justify-center transition-colors shadow-md"
                             >
                                 <VolumeX className="w-5 h-5" />
                             </button>
@@ -485,10 +497,10 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                                 type={textMode ? "submit" : "button"}
                                 onClick={textMode ? undefined : (isListening ? stopListening : startListening)}
                                 className={cn(
-                                    "w-12 h-12 rounded-2xl flex items-center justify-center transition-all",
+                                    "w-11 h-11 rounded-xl flex items-center justify-center transition-all shadow-md font-semibold",
                                     isListening 
                                         ? "bg-red-500 hover:bg-red-600 text-white animate-pulse" 
-                                        : "bg-primary hover:bg-primary-dark text-white"
+                                        : "bg-emerald-600 hover:bg-emerald-700 text-white"
                                 )}
                             >
                                 {textMode ? (
@@ -502,8 +514,8 @@ const VoiceAssistant = ({ isOpen, onClose }) => {
                         )}
                     </form>
                     
-                    <p className="text-center text-xs text-slate-400 mt-2">
-                        Press the mic and speak in English
+                    <p className="text-center text-xs text-slate-500 mt-3 font-medium">
+                        {textMode ? "Press enter or click send button" : "Click the microphone to speak"}
                     </p>
                 </div>
             </motion.div>
