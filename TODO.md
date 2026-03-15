@@ -1,7 +1,11 @@
-# TODO: Create branch 'final-version' and push to AgriLink ✅
+# TODO: Deploy to GitHub Pages ✅ (partial)
+
+Previous Git branch complete.
+
+Current: Fix 404 for GitHub Pages
 
 ## Steps:
-1. ✅ Add remote 'agriLink' -> https://github.com/vellanki-santhosh/AgriLink.git
-2. ✅ Create and checkout branch 'final-version'
-3. ✅ Push 'final-version' to agriLink
-4. ✅ Verify push: refs/heads/final-version exists on agriLink (SHA: 1f85eea29a31fa4c9920a7e5ef1860bf22adc8e9)
+1. ✅ Edit vite.config.js base to './'
+2. ✅ npm run build
+3. [ ] npm run deploy
+4. [ ] Verify GitHub Pages
